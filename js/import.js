@@ -4,7 +4,10 @@ function importBIN(event) {
 
   reader.onload = function(e) {
     const data = JSON.parse(e.target.result);
+
     events = data.events || [];
+    document.getElementById("title").value = data.title || "";
+
     render();
   };
 
