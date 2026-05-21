@@ -4,42 +4,53 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ChronoNova Editor</title>
+
   <link rel="stylesheet" href="css/editor.css">
+
+  <!-- Librairies -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
+
 <body>
 
-  <div class="topbar">
-    <input id="title" placeholder="Nom de la frise">
-    <button onclick="addEvent()">+ Ajouter</button>
-    <button onclick="exportBIN()">Exporter .bin</button>
-    <input type="file" onchange="importBIN(event)">
+<div class="topbar">
+  <input id="title" placeholder="Nom de la frise">
+
+  <button onclick="addEvent()">+ Event</button>
+  <button onclick="exportBIN()">.bin</button>
+  <button onclick="exportPNG()">PNG</button>
+  <button onclick="exportPDF()">PDF</button>
+
+  <input type="file" onchange="importBIN(event)">
+</div>
+
+<div class="layout">
+
+  <div class="sidebar">
+    <h3>Events</h3>
+    <div id="list"></div>
   </div>
 
-  <div class="container">
-
-    <div class="sidebar">
-      <h3>Événements</h3>
-      <div id="list"></div>
-    </div>
-
-    <div class="main">
-      <div id="timeline"></div>
-    </div>
-
-    <div class="panel">
-      <h3>Édition</h3>
-      <input id="date" placeholder="Date">
-      <input id="eventTitle" placeholder="Titre">
-      <input id="desc" placeholder="Description">
-      <button onclick="saveEdit()">Sauvegarder</button>
-    </div>
-
+  <div class="timeline-wrapper">
+    <div id="timeline"></div>
   </div>
 
-  <script src="js/app.js"></script>
-  <script src="js/storage.js"></script>
-  <script src="js/export.js"></script>
-  <script src="js/import.js"></script>
+  <div class="panel">
+    <h3>Edit</h3>
+
+    <input id="date" placeholder="Date">
+    <input id="eventTitle" placeholder="Titre">
+    <input id="desc" placeholder="Description">
+
+    <button onclick="saveEdit()">Save</button>
+  </div>
+
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/export.js"></script>
+<script src="js/import.js"></script>
 
 </body>
 </html>
