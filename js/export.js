@@ -1,16 +1,39 @@
 function exportBIN() {
-  const project = {
+  const data = {
     version: 1,
-    timelineName: document.getElementById("title").value,
-    events: events
+    title: document.getElementById("title").value,
+    events
   };
 
-  const blob = new Blob([JSON.stringify(project)], {
+  const blob = new Blob([JSON.stringify(data)], {
     type: "application/octet-stream"
   });
 
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
-  a.download = "frise.bin";
+  a.download = "chrononova.bin";
   a.click();
+}
+
+/* PNG EXPORT */
+function exportPNG() {
+  html2canvas(document.getElementById("timeline")).then(canvas => {
+    const a = document.createElement("a");
+    a.href = canvas.toDataURL();
+    a.download = "timeline.png";
+    a.click();
+  });
+}
+
+/* PDF EXPORT */
+function exportPDF() {
+  html2canvas(document.getElementById("timeline")).then(canvas => {
+    const img = canvas.toDataURL("image/png");
+
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF("landscape");
+
+    pdf.addImage(img, "PNG", 10, 10, 280, 150);
+    pdf.save("timeline.pdf");
+  });
 }
